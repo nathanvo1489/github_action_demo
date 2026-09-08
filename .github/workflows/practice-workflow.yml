@@ -50,11 +50,11 @@ jobs:
               if: ${{ needs.check.outputs.check_status == 'success' }}
               run: echo ${{ needs.check.outputs.check_status }}
             
+            - name: Checkout
+              uses: actions/checkout@v7.0.1
+            
             - name: Send mail
               uses: dawidd6/action-send-mail@v19
-              env:
-                  # Optional http proxy:
-                  HTTP_PROXY: http://proxy.example.test:3128
               with:
                   # Required mail server address if not connection_url:
                   server_address: smtp.gmail.com
