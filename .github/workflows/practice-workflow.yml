@@ -1,10 +1,11 @@
 # Tên workflow
 name: Practice Workflow
 # Sự kiện kích hoạt (trigger)
-on: 
-    push:
-        # Chỉ định nhánh để kích hoạt workflow
-        branches: [main]
+on:
+    workflow_dispatch:
+    # push:
+    #     # Chỉ định nhánh để kích hoạt workflow
+    #     branches: [main]
 
 # Biến môi trường dùng chung (optional)
 env:
@@ -77,32 +78,23 @@ jobs:
             - name: Send mail
               uses: dawidd6/action-send-mail@v19
               with:
-                  # Required mail server address if not connection_url:
-                  server_address: smtp.gmail.com
-  
-                  # Server port, default 25:
-                  server_port: 465
-  
-                  # Optional whether this connection use TLS (default is true if server_port is 465)
-                  secure: true
-  
-                  # Optional (recommended) mail server username:
-                  username: nathanvo1489@gmail.com
-  
-                  # Optional (recommended) mail server password:
-                  password: pwoiiopmoizoaouj
-  
-                  # Required mail subject:
-                  subject: Github Actions job result
-  
-                  # Optional recipients. Separate multiple addresses by a comma (possibly surrounded by whitespace):
-                  to: mnhat1994@gmail.com
-  
-                  # Required sender (supported formats: see "Supported address formats" below)
-                  from: 'Nathan Vo <nathanvo1489@gmail.com>'
-  
-                  # Optional plain body:
-                  body: Build job of ${{github.repository}} completed successfully!
-  
-                  # Optional HTML body read from file:
-                  html_body: file://email_final.html
+                # Required mail server address if not connection_url:
+                server_address: smtp.gmail.com
+                # Server port, default 25:
+                server_port: 465
+                # Optional whether this connection use TLS (default is true if server_port is 465)
+                secure: true
+                # Optional (recommended) mail server username:
+                username: nathanvo1489@gmail.com
+                # Optional (recommended) mail server password:
+                password: pwoiiopmoizoaouj
+                # Required mail subject:
+                subject: Github Actions job result
+                # Optional recipients. Separate multiple addresses by a comma (possibly surrounded by whitespace):
+                to: mnhat1994@gmail.com
+                # Required sender (supported formats: see "Supported address formats" below)
+                from: 'Nathan Vo <nathanvo1489@gmail.com>'
+                # Optional plain body:
+                body: Build job of ${{github.repository}} completed successfully!
+                # Optional HTML body read from file:
+                html_body: file://email_final.html
