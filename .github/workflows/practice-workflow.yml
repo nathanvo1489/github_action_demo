@@ -45,3 +45,7 @@ jobs:
             - name: Show
             # call back previous step by ID
               run: echo ${{ needs.check.outputs.check_status }}
+            
+            - name: Check Status
+              if: ${{ needs.check.outputs.check_status == 'success' }}
+              run: echo ${{ needs.check.outputs.check_status }}
