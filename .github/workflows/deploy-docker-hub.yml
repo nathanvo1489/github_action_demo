@@ -1,0 +1,54 @@
+name: Deploy to Docker Hub
+
+on:
+  push:
+    branches: [main]
+
+env:
+  DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+  DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7.0.1
+        
+      - name: webfactory/ssh-agent
+        uses: webfactory/ssh-agent@v0.10.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_KEY }}
+
+      - name: Trust host
+        run: ssh-keyscan -H ${{secrets.IP_SERVER_RUN}} >> ~/.ssh/known_hosts
+
+      - name: Check Dockerfile
+        run: |
+          ls -la
+          test -f Dockerfile
+      
+      - name: Check env file
+        run: |
+          ssh ${{secrets.SSH_USER}}@${{secrets.IP_SERVER_RUN}} "
+          ls -la
+          "
+
+#   build-and-push:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Checkout code
+#         uses: actions/checkout@v7.0.1
+
+#       - name: Log in to Docker Hub
+#         uses: docker/login-action@v2
+#         with:
+#           username: {{ env.DOCKER_USERNAME }}
+#           password: {{ env.DOCKER_PASSWORD }}
+
+#       - name: Build and push Docker image
+#         uses: docker/build-push-action@v5
+#         with:
+#           context: .
+#           push: true
+#           tags: {{ env.DOCKER_USERNAME }}/my-app:latest
