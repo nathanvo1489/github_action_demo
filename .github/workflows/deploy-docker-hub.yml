@@ -9,7 +9,7 @@ env:
   WORK_DIR: /home/ubuntu/devops04/github_action_demo
   COMPOSE_FILE_DIR: /home/ubuntu/devops04
   IMG_NAME: nathanvo1489/github_action_demo_image:latest
-  SERVICE_NAME: go_gin_be
+  SERVICE_NAME: github_action_demo
 
 jobs:
   check:
