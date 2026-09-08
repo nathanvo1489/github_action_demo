@@ -38,10 +38,10 @@ jobs:
 
     # build job
     build:
-        # needs: check
+        needs: [check]
         runs-on: ubuntu-latest
         
         steps: # workflow (steps) in job
             - name: Show
             # call back previous step by ID
-              run: echo "123"
+              run: echo ${{ needs.check.outputs.check_status }}
