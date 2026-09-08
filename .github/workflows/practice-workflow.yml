@@ -30,4 +30,4 @@ jobs:
             
             - name: Show
             # call back previous step by ID
-                run: echo ${{ steps.check.outputs.status }}
+              run: echo ${{ steps.check.outputs.status }}
