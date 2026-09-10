@@ -3,6 +3,7 @@ package main
 import (
 	"database/sql"
 	"log"
+	"time"
 
 	"github.com/gin-gonic/gin"
 	_ "github.com/lib/pq"
@@ -19,6 +20,7 @@ func main() {
 			time.Sleep(2 * time.Second)
 		}
 	}()
+
 	godotenv.Load()
 
 	DATABASE_URL := os.Getenv("DATABASE_URL")
