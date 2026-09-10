@@ -1,9 +1,9 @@
 name: Move Image
 
 on:
-  workflow_dispatch:
-  # push:
-  #   branches: [main]
+  # workflow_dispatch:
+  push:
+    branches: [main]
 
 env:
   SSH_SERVER: ${{secrets.SSH_USER}}@${{secrets.IP_SERVER_RUN}}
