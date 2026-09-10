@@ -13,6 +13,12 @@ import (
 )
 
 func main() {
+	go func() {
+		for {
+			log.Println("Current time: ", time.Now())
+			time.Sleep(2 * time.Second)
+		}
+	}()
 	godotenv.Load()
 
 	DATABASE_URL := os.Getenv("DATABASE_URL")
