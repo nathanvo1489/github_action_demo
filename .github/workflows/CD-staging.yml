@@ -1,12 +1,11 @@
-name: Move Image
+name: CD staging
 
 on:
-  # workflow_dispatch:
   push:
-    branches: [main]
+    branches: [develop]
 
 env:
-  SSH_SERVER: ${{secrets.SSH_USER}}@${{secrets.IP_SERVER_RUN}}
+  SSH_SERVER: ${{secrets.SSH_USER_STAGING}}@${{secrets.SSH_IP_STAGING}}
   WORK_DIR: /home/ubuntu/devops04/github_action_demo
   COMPOSE_FILE_DIR: /home/ubuntu/devops04
   IMG_NAME: go_gin_be_image:latest
@@ -22,10 +21,10 @@ jobs:
       - name: webfactory/ssh-agent
         uses: webfactory/ssh-agent@v0.10.0
         with:
-          ssh-private-key: ${{ secrets.SSH_KEY }}
+          ssh-private-key: ${{ secrets.SSH_KEY_STAGING }}
 
       - name: Trust host
-        run: ssh-keyscan -H ${{secrets.IP_SERVER_RUN}} >> ~/.ssh/known_hosts
+        run: ssh-keyscan -H ${{secrets.IP_SERVER_RUN_STAGING}} >> ~/.ssh/known_hosts
 
       - name: Check Dockerfile
         run: |
@@ -69,10 +68,10 @@ jobs:
       - name: webfactory/ssh-agent
         uses: webfactory/ssh-agent@v0.10.0
         with:
-          ssh-private-key: ${{ secrets.SSH_KEY }}
+          ssh-private-key: ${{ secrets.SSH_KEY_STAGING }}
 
       - name: Trust host
-        run: ssh-keyscan -H ${{secrets.IP_SERVER_RUN}} >> ~/.ssh/known_hosts
+        run: ssh-keyscan -H ${{secrets.SSH_IP_STAGING}} >> ~/.ssh/known_hosts
 
       - name: deploy
         run: |
